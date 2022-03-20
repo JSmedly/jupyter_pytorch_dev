@@ -1,0 +1,4 @@
+# opencv-python
+scikit-image
+scikit-learn
+ipykernel>=6.0.0
