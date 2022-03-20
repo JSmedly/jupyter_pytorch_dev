@@ -3,12 +3,14 @@ FROM pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime
 # WORKDIR /workspace
 
 # Update
-RUN apt-get update
+RUN apt-get update && apt-get install -y \
+    git
 
 # Install Jupyter and other maths related libraries
 RUN pip install \
     h5py \
     ipykernel>=6.0.0 \
+    ipywidgets \
     notebook \
     numpy \
     pandas \
