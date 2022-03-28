@@ -1,29 +1,21 @@
-# syntax=docker/dockerfile:1
-FROM pytorch/pytorch:1.11.0-cuda11.3-cudnn8-runtime
-# WORKDIR /workspace
+# FROM nvidia/cuda:11.4.2-base-ubuntu20.04
+FROM nvcr.io/nvidia/pytorch:22.02-py3
 
-# Update
+# Build with some basic utilities
 RUN apt-get update && apt-get install -y \
-    git
+    git 
 
-# Install Jupyter and other maths related libraries
+# # alias python='python3'
+# RUN ln -s /usr/bin/python3 /usr/bin/python
+
 RUN pip install \
-    h5py \
-    ipykernel>=6.0.0 \
-    ipywidgets \
-    notebook \
-    numpy \
-    pandas \
-    scipy \
-    seaborn
-
+    jupyterlab \
+    ipykernel \
+    ipywidgets
 
 # Install Dependencies
 COPY requirements.txt /tmp/requirements.txt
 RUN pip3 install -r /tmp/requirements.txt
 
-# Run Jupyter Notebook
-CMD [ "jupyter", "notebook", "--port=8888", "--no-browser",\
-    "--ip=0.0.0.0", "--allow-root"]
-
+CMD ["jupyter", "notebook", "--ip=0.0.0.0", "--port=8888", "--allow-root", "--no-browser"]
 EXPOSE 8888

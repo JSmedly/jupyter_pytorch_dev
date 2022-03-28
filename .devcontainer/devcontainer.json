@@ -9,7 +9,8 @@
 	"runArgs": [
         "--name", "my_project_jupyter_torch",
         "--gpus", "all",
-        "--rm"
+        "--rm",
+		"--privileged"
     ],
 
 	"forwardPorts": [8888]
